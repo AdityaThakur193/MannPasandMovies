@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ManPasandMovies - Cinematic Movie Discovery Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo" tabindex="0" aria-label="MannPasandMovies Cinematic Movie Discovery">
+      MannPasandMovies
+    </div>
+    <input id="search-input" type="search" aria-label="Search movies by title" placeholder="Search movies..." />
+  </header>
+
+  <section id="filter-bar" aria-label="Movie filters and sorting">
+    <label for="filter-genre">Genre:</label>
+    <select id="filter-genre" aria-controls="movie-list" aria-label="Filter movies by genre">
+      <option value="">All Genres</option>
+    </select>
+
+    <label for="filter-year">Year:</label>
+    <select id="filter-year" aria-controls="movie-list" aria-label="Filter movies by release year">
+      <option value="">All Years</option>
+    </select>
+
+    <label for="filter-rating">Rating:</label>
+    <select id="filter-rating" aria-controls="movie-list" aria-label="Filter movies by rating">
+      <option value="">All Ratings</option>
+      <option value="9">≥ 9.0</option>
+      <option value="8">≥ 8.0</option>
+      <option value="7">≥ 7.0</option>
+      <option value="6">≥ 6.0</option>
+    </select>
+
+    <label for="sort-option">Sort By:</label>
+    <select id="sort-option" aria-controls="movie-list" aria-label="Sort movies">
+      <option value="default">Default</option>
+      <option value="title-asc">Title (A-Z)</option>
+      <option value="title-desc">Title (Z-A)</option>
+      <option value="year-desc">Year (Newest)</option>
+      <option value="year-asc">Year (Oldest)</option>
+      <option value="rating-desc">Rating (High to Low)</option>
+      <option value="rating-asc">Rating (Low to High)</option>
+    </select>
+
+    <button id="dark-mode-toggle" aria-pressed="false" aria-label="Toggle theme" title="Toggle Light/Dark Theme">
+      Dark Mode
+    </button>
+  </section>
+
+  <section id="editors-choice" aria-label="Editor's Choice Movies" tabindex="0">
+    <h2>Editor's Choice</h2>
+    <div id="editors-choice-list" aria-live="polite" aria-atomic="true" tabindex="0">
+      <!-- Editor's Choice movie cards rendered here -->
+    </div>
+  </section>
+
+  <main id="movie-list" aria-live="polite" tabindex="0" aria-label="List of movies">
+    <!-- Movie cards generated dynamically -->
+  </main>
+
+  <button id="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top" aria-hidden="true">&#8679;</button>
+
+  <!-- Movie Detail Modal -->
+  <div id="movie-detail-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); color:#cdd0e0; overflow-y:auto; z-index:2000; padding:2rem;">
+    <div id="movie-detail" style="max-width: 900px; margin: 0 auto; background: rgba(42,42,64,0.95); border-radius: 16px; padding: 2rem; font-family:'Poppins', sans-serif; position: relative;">
+      <button id="close-detail" aria-label="Close movie details" style="position:absolute; top:1rem; right:1rem; background:#fca311; border:none; border-radius:8px; padding:0.5rem 1rem; cursor:pointer; font-weight:bold;">Close ✕</button>
+      <div style="display:flex; flex-wrap:wrap; gap:2rem;">
+        <img id="detail-poster" src="" alt="Poster" style="width:300px; border-radius: 12px; flex-shrink: 0;" />
+        <div style="flex:1; min-width: 280px;">
+          <h1 id="detail-title" style="color:#fca311; margin-bottom: 0.2rem;"></h1>
+          <p id="detail-year-genre" style="margin:0 0 1rem 0; font-weight: 600;"></p>
+          <p id="detail-rating" style="margin:0 0 1rem 0; font-style: italic;"></p>
+          <p id="detail-description" style="line-height: 1.5;"></p>
+          <h3>Available to Watch On:</h3>
+          <ul id="platforms" style="list-style:none; padding-left:0; display:flex; gap: 15px; flex-wrap: wrap;"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
