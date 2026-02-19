@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MannPasandMovies - Cinematic Movie Discovery Platform</title>
+    <meta name="description" content="Discover movies you'll love with search, filters, watchlists, and detailed pages powered by TMDB." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MannPasandMovies - Cinematic Movie Discovery Platform" />
+    <meta property="og:description" content="Discover movies you'll love with search, filters, watchlists, and detailed pages powered by TMDB." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-domain.example/" />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MannPasandMovies - Cinematic Movie Discovery Platform" />
+    <meta name="twitter:description" content="Discover movies you'll love with search, filters, watchlists, and detailed pages powered by TMDB." />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <link rel="canonical" href="https://your-domain.example/" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "MannPasandMovies",
+        "url": "https://your-domain.example/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://your-domain.example/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- Optional: Vercel Web Analytics (replace with your data-website-id if using) -->
+    <!-- <script defer src="https://va.vercel-scripts.com/v1/script.js" data-website-id="YOUR_VERCEL_ANALYTICS_ID"></script> -->
+  </body>
+</html>
