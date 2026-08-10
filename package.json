@@ -1,18 +1,39 @@
 {
   "name": "mannpasandmovies-mern",
   "version": "1.0.0",
-  "description": "Full-stack movie discovery app with React, Node.js, Express, and MongoDB",
+  "description": "Full-stack cinematic movie discovery and watchlist engine built with React 18, Node.js, Express, and MongoDB Atlas",
   "main": "index.js",
   "scripts": {
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "test": "cd server && npm test && cd ../client && npm test"
   },
-  "keywords": ["react", "mongodb", "express", "nodejs", "movies", "tmdb"],
-  "author": "Your Name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdityaThakur193/ManPasandMovies-MERN.git"
+  },
+  "keywords": [
+    "react",
+    "mongodb",
+    "express",
+    "nodejs",
+    "movies",
+    "tmdb",
+    "jwt",
+    "oauth2",
+    "vite",
+    "vitest",
+    "jest"
+  ],
+  "author": "Aditya Thakur <adityath2305@gmail.com> (https://adityathakur.me/)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AdityaThakur193/ManPasandMovies-MERN/issues"
+  },
+  "homepage": "https://github.com/AdityaThakur193/ManPasandMovies-MERN#readme",
   "devDependencies": {
     "concurrently": "^8.2.2"
   }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Bookmark, Sparkles, User, BarChart3, LogOut, LogIn, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useUI } from '../context/UIContext';
 import '../styles/Navbar.css';
 
 // Helper function to extract first letter from username/email
@@ -50,9 +51,13 @@ AvatarBadge.propTypes = {
 
 const Navbar = ({ onShowAuthModal, onShowStats }) => {
   const { user, isAuthenticated, logout } = useAuth();
+  const { openAuthModal, setShowStats } = useUI();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const location = useLocation();
+
+  const triggerAuthModal = onShowAuthModal || openAuthModal;
+  const triggerShowStats = onShowStats || (() => setShowStats(true));
 
   const isActive = (path) => location.pathname === path;
 
@@ -129,7 +134,7 @@ const Navbar = ({ onShowAuthModal, onShowStats }) => {
                   className="dropdown-item"
                   onClick={() => {
                     setShowDropdown(false);
-                    onShowStats();
+                    triggerShowStats();
                   }}
                 >
                   <BarChart3 size={18} strokeWidth={2.4} aria-hidden="true" /> My Stats
@@ -155,7 +160,7 @@ const Navbar = ({ onShowAuthModal, onShowStats }) => {
         ) : (
           <button 
             className="auth-btn"
-            onClick={() => onShowAuthModal('login')}
+            onClick={() => triggerAuthModal('login')}
             aria-label="Login"
           >
             <LogIn size={18} strokeWidth={2.4} aria-hidden="true" /> Login
@@ -205,8 +210,8 @@ const Navbar = ({ onShowAuthModal, onShowStats }) => {
 };
 
 Navbar.propTypes = {
-  onShowAuthModal: PropTypes.func.isRequired,
-  onShowStats: PropTypes.func.isRequired,
+  onShowAuthModal: PropTypes.func,
+  onShowStats: PropTypes.func,
 };
 
 export default Navbar;

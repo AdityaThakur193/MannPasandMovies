@@ -1,7 +1,7 @@
 {
   "name": "mannpasandmovies-server",
   "version": "1.0.0",
-  "description": "Backend API for MannPasandMovies",
+  "description": "Secure, rate-limited REST API and TMDB proxy engine for MannPasandMovies",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,8 +10,23 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdityaThakur193/ManPasandMovies-MERN.git",
+    "directory": "server"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "mongodb",
+    "mongoose",
+    "jwt",
+    "passport",
+    "tmdb",
+    "helmet",
+    "rate-limit"
+  ],
+  "author": "Aditya Thakur <adityath2305@gmail.com> (https://adityathakur.me/)",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.6.2",

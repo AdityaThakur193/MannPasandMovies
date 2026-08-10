@@ -17,6 +17,8 @@ import {
 import { Star, Heart, BookmarkPlus, BookmarkCheck, PlayCircle, Tv2, PenLine } from 'lucide-react';
 import { useMovie } from '../context/MovieContext';
 import { useAuth } from '../context/AuthContext';
+import ReviewForm from '../components/ReviewForm';
+import ReviewList from '../components/ReviewList';
 import '../styles/MovieDetails.css';
 
 const MovieDetails = () => {
@@ -28,18 +30,6 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [cast, setCast] = useState([]);
-
-  useEffect(() => {
-    // Apply saved theme from localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.body.classList.remove('dark-mode');
-      document.body.classList.add('light-mode');
-    } else {
-      document.body.classList.remove('light-mode');
-      document.body.classList.add('dark-mode');
-    }
-  }, []);
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [providers, setProviders] = useState(null);
@@ -48,6 +38,18 @@ const MovieDetails = () => {
   const [reviewForm, setReviewForm] = useState({ rating: 5, review: '' });
   const [editingReview, setEditingReview] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
+
+  // Retrieve current user ID safely from localStorage
+  const getCurrentUserId = () => {
+    try {
+      const userStr = localStorage.getItem('user');
+      return userStr ? JSON.parse(userStr)?._id : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const currentUserId = getCurrentUserId();
 
   useEffect(() => {
     loadMovieData();
@@ -70,7 +72,6 @@ const MovieDetails = () => {
       setSimilar(similarMovies.results.slice(0, 6));
       setReviews(Array.isArray(movieReviews) ? movieReviews : []);
       
-      // Get US providers (you can change 'US' to any country code)
       setProviders(watchProviders.results?.US || null);
 
       const youtubeTrailer = videos.results.find(
@@ -113,13 +114,11 @@ const MovieDetails = () => {
       return;
     }
 
-    // Validate rating
     if (reviewForm.rating < 1 || reviewForm.rating > 5) {
       alert('Rating must be between 1 and 5 stars');
       return;
     }
 
-    // Validate review text
     if (!reviewForm.review || reviewForm.review.trim().length === 0) {
       alert('Please write a review');
       return;
@@ -129,7 +128,6 @@ const MovieDetails = () => {
       if (editingReview) {
         const response = await updateReview(editingReview._id, reviewForm);
         const updatedReview = response.review || response.data?.review || response;
-        // Update the review in the state immediately
         setReviews(prev => prev.map(r => 
           r._id === editingReview._id 
             ? { ...r, ...reviewForm, ...updatedReview, updatedAt: new Date().toISOString() }
@@ -143,11 +141,10 @@ const MovieDetails = () => {
           review: reviewForm.review,
         });
         const newReview = response.review || response.data?.review || response;
-        // Add the new review to the state immediately
         const reviewToAdd = {
           _id: newReview._id || Date.now().toString(),
           user: { 
-            _id: JSON.parse(localStorage.getItem('user'))?._id,
+            _id: currentUserId,
             name: JSON.parse(localStorage.getItem('user'))?.name 
           },
           rating: parseInt(reviewForm.rating),
@@ -162,8 +159,7 @@ const MovieDetails = () => {
       setShowReviewForm(false);
     } catch (error) {
       console.error('Error submitting review:', error);
-      const errorMsg = error.response?.data?.message || 'Failed to submit review';
-      alert(errorMsg);
+      alert(error.response?.data?.message || 'Failed to submit review');
     }
   };
 
@@ -172,12 +168,17 @@ const MovieDetails = () => {
 
     try {
       await deleteReview(reviewId);
-      // Remove the review from state immediately
       setReviews(prev => prev.filter(r => r._id !== reviewId));
     } catch (error) {
       console.error('Error deleting review:', error);
       alert('Failed to delete review');
     }
+  };
+
+  const handleEditClick = (review) => {
+    setEditingReview(review);
+    setReviewForm({ rating: review.rating, review: review.review });
+    setShowReviewForm(true);
   };
 
   if (loading) {
@@ -385,88 +386,26 @@ const MovieDetails = () => {
           </div>
 
           {showReviewForm && (
-            <form className="review-form" onSubmit={handleReviewSubmit}>
-              <div className="form-group">
-                <label>Rating</label>
-                <div className="star-rating">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star
-                      key={star}
-                      size={20}
-                      strokeWidth={2.4}
-                      className={`star ${reviewForm.rating >= star ? 'active' : ''}`}
-                      onClick={() => setReviewForm({ ...reviewForm, rating: star })}
-                      aria-label={`Rate ${star} star${star > 1 ? 's' : ''}`}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Your Review</label>
-                <textarea
-                  value={reviewForm.review}
-                  onChange={(e) => setReviewForm({ ...reviewForm, review: e.target.value })}
-                  required
-                  rows="4"
-                  placeholder="Share your thoughts about this movie..."
-                />
-              </div>
-              <div className="form-actions">
-                <button type="submit" className="submit-btn">
-                  {editingReview ? 'Update Review' : 'Submit Review'}
-                </button>
-                <button 
-                  type="button" 
-                  className="cancel-btn"
-                  onClick={() => {
-                    setShowReviewForm(false);
-                    setEditingReview(null);
-                    setReviewForm({ rating: 5, review: '' });
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+            <ReviewForm
+              reviewForm={reviewForm}
+              setReviewForm={setReviewForm}
+              onSubmit={handleReviewSubmit}
+              onCancel={() => {
+                setShowReviewForm(false);
+                setEditingReview(null);
+                setReviewForm({ rating: 5, review: '' });
+              }}
+              isEditing={!!editingReview}
+            />
           )}
 
-          <div className="reviews-list">
-            {reviews.map((review) => (
-              <div key={review._id} className="review-card">
-                <div className="review-header">
-                  <div className="review-author">
-                    <strong>{review.user?.name}</strong>
-                    <div className="review-rating">
-                      {Array.from({ length: review.rating }).map((_, idx) => (
-                        <Star key={idx} size={16} strokeWidth={2.4} aria-hidden="true" />
-                      ))}
-                    </div>
-                  </div>
-                  <small>{new Date(review.createdAt).toLocaleDateString()}</small>
-                </div>
-                <p className="review-text">{review.review}</p>
-                {isAuthenticated && review.user?._id === JSON.parse(localStorage.getItem('user'))?._id && (
-                  <div className="review-actions">
-                    <button 
-                      onClick={() => {
-                        setEditingReview(review);
-                        setReviewForm({ rating: review.rating, review: review.review });
-                        setShowReviewForm(true);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button onClick={() => handleDeleteReview(review._id)}>
-                      Delete
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-            {reviews.length === 0 && (
-              <p className="no-reviews">No reviews yet. Be the first to review!</p>
-            )}
-          </div>
+          <ReviewList
+            reviews={reviews}
+            isAuthenticated={isAuthenticated}
+            currentUserId={currentUserId}
+            onEdit={handleEditClick}
+            onDelete={handleDeleteReview}
+          />
         </div>
 
         {similar.length > 0 && (

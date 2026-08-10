@@ -18,7 +18,7 @@ const Footer = ({ socialLinks = {} }) => {
   const defaultSocialLinks = {
     github: 'https://github.com/AdityaThakur193',
     linkedin: 'https://www.linkedin.com/in/aditya-thakur193',
-    email: 'contact@mannpasandmovies.com'
+    email: 'adityath2305@gmail.com'
   };
 
   const links = { ...defaultSocialLinks, ...socialLinks };

@@ -93,7 +93,6 @@ userSchema.methods.toJSON = function() {
 };
 
 // Add indexes for better query performance
-userSchema.index({ email: 1 });
 userSchema.index({ 'watchlist.movieId': 1 });
 userSchema.index({ 'likedMovies.movieId': 1 });
 userSchema.index({ createdAt: -1 });

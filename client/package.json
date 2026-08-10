@@ -3,6 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "description": "High-performance React 18 & Vite frontend for MannPasandMovies",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdityaThakur193/ManPasandMovies-MERN.git",
+    "directory": "client"
+  },
+  "author": "Aditya Thakur <adityath2305@gmail.com> (https://adityathakur.me/)",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
