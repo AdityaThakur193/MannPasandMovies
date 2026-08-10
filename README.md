@@ -163,12 +163,9 @@ flowchart TD
 | :---: | :---: |
 | <img src="./client/public/preview-reviews.png" width="440" alt="Reviews & Streaming" /><br />*Streaming & rental provider links (MGM+, Prime, Apple TV) with community reviews* | <img src="./client/public/preview-watchlist.png" width="440" alt="Watchlist" /><br />*Personalized saved watchlist with real-time atomic database synchronization* |
 
-<div align="center">
-  <br />
-  <h3>📊 User Movie Stats & Profile Modal</h3>
-  <img src="./client/public/preview-stats.png" width="560" alt="User Stats Modal" />
-  <p><em>Aggregated user insights: Total Movies Liked, Watchlist Count, Reviews Written, Average Rating & Account Info</em></p>
-</div>
+| 👤 User Profile & Review History | 📊 User Stats & Insights Modal |
+| :---: | :---: |
+| <img src="./client/public/preview-profile.png" width="440" alt="User Profile & Reviews" /><br />*Account security management, review edit/delete controls & sorting filters* | <img src="./client/public/preview-stats.png" width="440" alt="User Stats Modal" /><br />*Aggregated user analytics: Likes, Watchlists, Reviews Written & 5-star ratings* |
 
 ---
 
