@@ -155,13 +155,20 @@ flowchart TD
 
 ## 💻 Visual UI / Showcase
 
-| 🌟 Hero Discovery & Search Feed | 🎬 Movie Details, Trailers & Reviews |
+| 🌟 Hero Discovery & Search Feed | 🎬 Movie Details, Overview & Actions |
 | :---: | :---: |
-| <img src="./client/public/logo.png" width="280" alt="Discovery Feed" /><br />*Real-time debounced search, filter panel & Editor's Choice carousel* | <img src="./client/public/logo.png" width="280" alt="Movie Details" /><br />*YouTube trailer embeds, streaming providers, cast & 5-star user reviews* |
+| <img src="./client/public/preview-home.png" width="440" alt="Discovery Feed" /><br />*Real-time debounced search, genre & rating filter panel, and Editor's Choice carousel* | <img src="./client/public/preview-details.png" width="440" alt="Movie Details" /><br />*High-res backdrop, rating badges, overview, and one-click Like/Watchlist actions* |
 
-| 🔖 Personalized Watchlist & Likes | 🌓 Dynamic Dark & Light Theme System |
+| 📺 Where to Watch & 5-Star Reviews | 🔖 Personalized Watchlist Management |
 | :---: | :---: |
-| <img src="./client/public/logo.png" width="280" alt="Watchlist" /><br />*One-click atomic add/remove with instant optimistic state synchronization* | <img src="./client/public/logo.png" width="280" alt="Theme Toggle" /><br />*WCAG-compliant high-contrast cinematic color palette with smooth transitions* |
+| <img src="./client/public/preview-reviews.png" width="440" alt="Reviews & Streaming" /><br />*Streaming & rental provider links (MGM+, Prime, Apple TV) with community reviews* | <img src="./client/public/preview-watchlist.png" width="440" alt="Watchlist" /><br />*Personalized saved watchlist with real-time atomic database synchronization* |
+
+<div align="center">
+  <br />
+  <h3>📊 User Movie Stats & Profile Modal</h3>
+  <img src="./client/public/preview-stats.png" width="560" alt="User Stats Modal" />
+  <p><em>Aggregated user insights: Total Movies Liked, Watchlist Count, Reviews Written, Average Rating & Account Info</em></p>
+</div>
 
 ---
 
